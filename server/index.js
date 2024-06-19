@@ -3,6 +3,7 @@ const { createServer } = require("http")
 const { Server } = require("socket.io")
 
 const roomHandlers = require("./handlers/roomHandler")
+const canvasHandlers = require("./handlers/canvasHandler")
 
 const port = 3000
 const app = express()
@@ -16,6 +17,7 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
     console.log(`${socket.id} connected`)
     roomHandlers(io, socket)
+    canvasHandlers(io, socket)
 
     socket.on("disconnect", () => {
         console.log(`${socket.id} disconnected`)
