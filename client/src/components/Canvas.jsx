@@ -9,24 +9,30 @@ function Canvas() {
     const socket = useContext(SocketContext)
     const room = useParams().room
 
-    const paint = (x, y) => {
-        const canvas = canvasRef.current
-        const ctx = canvas.getContext("2d")
-        console.log(`painting x: ${x} + y: ${y}`)
-        ctx.lineTo(x, y)
-        ctx.stroke()
+    const paint = (x, y, start, id) => {
+        if(id !== socket.id) {
+            const canvas = canvasRef.current
+            const ctx = canvas.getContext("2d")
+            //console.log(`painting x: ${x} + y: ${y}`)
+            if(start) {
+                ctx.moveTo(x, y)
+                ctx.fillRect(x, y, 1, 1) //TODO change to variable
+            } else {
+                ctx.lineTo(x, y)
+                ctx.stroke()
+            }
+        }
     }
 
     socket.on("startDraw", (data) => {
-            ctx.moveTo(data.x, data.y)
-            ctx.fillRect(data.x, data.y, 1, 1) //TODO change to variable
+        paint(data.x, data.y, true, data.id)
     })
 
     socket.on("draw", (data) => {
-        paint(data.x, data.y)
+        paint(data.x, data.y, false, data.id)
     })
-    
-    
+
+
 
     const mouseUp = () => {
         setMDown(false)
@@ -42,26 +48,19 @@ function Canvas() {
 
     const mouseDown = (event) => {
         const {x, y} = getCanvas(event)
-        const canvas = canvasRef.current
-        const ctx = canvas.getContext("2d")
-        ctx.moveTo(x, y) 
-        ctx.fillRect(x, y, 1, 1) //TODO change to variable
+        paint(x, y, true)
         setMDown(true)
-        
         socket.emit("canvas:startdraw", 
-            ({room: room, x: x, y: y}))
+            ({room: room, id: socket.id, x: x, y: y}))
             
     }
 
     const mouseMove = (event) => {
         const {x, y} = getCanvas(event)
         if(mDown) {
-            paint(x, y)
-            
+            paint(x, y, false)
             socket.emit("canvas:draw", 
                 ({room: room, id: socket.id, x: x, y: y}))
-                
-            //console.log(event)
         }
     }
 

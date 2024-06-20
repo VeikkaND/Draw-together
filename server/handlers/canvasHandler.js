@@ -1,13 +1,13 @@
 module.exports = (io, socket) => {
-    const startDraw = ({room, x, y}) => {
+    const startDraw = ({room, id, x, y}) => {
         console.log("startDraw")
-        socket.to(room).emit("startDraw", {x: x, y: y})
+        io.to(room).emit("startDraw", {id: id, x: x, y: y})
     }
 
-    const draw = ({room, x, y}) => {
+    const draw = ({room, id, x, y}) => {
         console.log("draw " + room)
         console.log(`x: ${x} + y: ${y}`)
-        socket.to(room).emit("draw", {x: x, y: y})
+        io.to(room).emit("draw", {id: id, x: x, y: y})
     }
 
     socket.on("canvas:startdraw", startDraw)
