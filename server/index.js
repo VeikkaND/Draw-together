@@ -4,6 +4,7 @@ const { Server } = require("socket.io")
 
 const roomHandlers = require("./handlers/roomHandler")
 const canvasHandlers = require("./handlers/canvasHandler")
+const chatHandlers = require("./handlers/chatHandler")
 
 const port = 3000
 const app = express()
@@ -18,6 +19,7 @@ io.on("connection", (socket) => {
     console.log(`${socket.id} connected`)
     roomHandlers(io, socket)
     canvasHandlers(io, socket)
+    chatHandlers(io, socket)
 
     socket.on("disconnect", () => {
         console.log(`${socket.id} disconnected`)

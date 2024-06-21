@@ -8,3 +8,28 @@ canvas {
     display: flex;
     flex-direction: row;
 }
+
+.content {
+    display: flex;
+    flex-direction: row;
+}
+
+.chat {
+    display: flex;
+    flex-direction: column;
+    border: solid 1px;
+    width: 30vw;
+    height: 400px;
+    text-align: center;
+}
+
+.chat .messages {
+    display: flex;
+    flex-direction: column-reverse;
+    height: 100%;
+    overflow: auto;
+}
+
+.chat input {
+    
+}

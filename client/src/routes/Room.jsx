@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import SocketContext from "../util/socketContext"
 import Canvas from "../components/Canvas"
 import Tools from "../components/Tools"
+import Chat from "../components/Chat"
 
 function Room() {
     const socket = useContext(SocketContext)
@@ -18,8 +19,15 @@ function Room() {
         <div>
             <button onClick={handleBack}>back</button>
             <h1>{room}</h1>
-            <Canvas />
-            <Tools />
+            <div className="content">
+                <div>
+                    <Canvas />
+                    <Tools />
+                </div>
+                <div>
+                    <Chat />
+                </div>
+            </div>
         </div>
     )
 }
