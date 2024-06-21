@@ -1,6 +1,7 @@
 import React, { useContext, useState, useRef } from "react"
 import SocketContext from "../util/socketContext"
 import { useParams } from "react-router-dom"
+import { useSelector } from "react-redux"
 
 
 function Canvas() {
@@ -8,13 +9,16 @@ function Canvas() {
     const canvasRef = useRef(null)
     const socket = useContext(SocketContext)
     const room = useParams().room
+    const color = useSelector((state) => state.color.value)
 
-    const paint = (x, y, start, id) => {
+    const paint = (x, y, start, color, id) => {
         if(id !== socket.id) {
             const canvas = canvasRef.current
             const ctx = canvas.getContext("2d")
+            ctx.strokeStyle = color
             //console.log(`painting x: ${x} + y: ${y}`)
             if(start) {
+                ctx.beginPath()
                 ctx.moveTo(x, y)
                 ctx.fillRect(x, y, 1, 1) //TODO change to variable
             } else {
@@ -25,11 +29,11 @@ function Canvas() {
     }
 
     socket.on("startDraw", (data) => {
-        paint(data.x, data.y, true, data.id)
+        paint(data.x, data.y, true, data.color, data.id)
     })
 
     socket.on("draw", (data) => {
-        paint(data.x, data.y, false, data.id)
+        paint(data.x, data.y, false, data.color, data.id)
     })
 
     socket.on("clear", () => {
@@ -54,18 +58,18 @@ function Canvas() {
 
     const mouseDown = (event) => {
         const {x, y} = getCanvas(event)
-        paint(x, y, true)
+        paint(x, y, true, color)
         setMDown(true)
         socket.emit("canvas:startdraw", 
-            ({room: room, id: socket.id, x: x, y: y}))   
+            ({room: room, id: socket.id, x: x, y: y, color: color}))   
     }
 
     const mouseMove = (event) => {
         const {x, y} = getCanvas(event)
         if(mDown) {
-            paint(x, y, false)
+            paint(x, y, false, color)
             socket.emit("canvas:draw", 
-                ({room: room, id: socket.id, x: x, y: y}))
+                ({room: room, id: socket.id, x: x, y: y, color: color}))
         }
     }
 
