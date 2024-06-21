@@ -11,15 +11,23 @@ function Chat() {
     const name = useSelector((state) => state.name.value)
     
     socket.on("message", (data) => {
-        setMessages(messages.concat(data))
+        const newMessages = messages.concat(data)
+        newMessages.sort((a, b) => {
+            if(a.time < b.time) return -1
+            else if(a.time > b.time) return 1
+            else return 0
+        })
+        setMessages(newMessages)
     })
 
     const handleSubmit = (event) => {
         event.preventDefault()
+        const time = Date.now()
+        console.log(time)
         const text = event.target.text.value 
         if(text !== "") {
             socket.emit("chat:message", 
-                ({room: room, name: name, text: text}))
+                ({room: room, name: name, text: text, time: time}))
             event.target.text.value = ""
         }
     }
@@ -29,10 +37,11 @@ function Chat() {
             <div className="messages">
                 {messages.reverse().map((message) => 
                 <Message text={message.text} sender={message.name} 
-                key={Math.random().toString(16).slice(2)}/>)}
+                key={message.time}/>)}
             </div>
             <form onSubmit={handleSubmit}>
-                <input name="text" autoComplete="off"></input>
+                <input name="text" autoComplete="off"
+                placeholder="write a message"></input>
             </form>
         </div>
     )

@@ -13,12 +13,13 @@ function Room() {
     const handleBack = () => {
         socket.emit("room:leave", room)
         navigate("/")
+        window.location.reload()
     }
 
     return(
         <div>
             <button onClick={handleBack}>back</button>
-            <h1>{room}</h1>
+            <h1 id="title">room code: {room}</h1>
             <div className="content">
                 <div className="drawing">
                     <Canvas />

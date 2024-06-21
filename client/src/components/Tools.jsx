@@ -44,10 +44,10 @@ function Tools() {
             <button onClick={handleClear}>clear</button>
             <>
                 <input type="range" name="width" 
-                min={1} max={4} step={1} defaultValue={1}
+                min={1} max={4} step={1} defaultValue={2}
                 list="markers"
                 onChange={setWid}></input>
-                
+
                 <datalist id="markers">
                     <option value={1}></option>
                     <option value={2}></option>
@@ -58,12 +58,29 @@ function Tools() {
             <div className="colors">
                 <button onClick={setCol} name="red" 
                 style={{background: "red"}}></button>
+                <button onClick={setCol} name="pink" 
+                style={{background: "pink"}}></button>
                 <button onClick={setCol} name="green" 
                 style={{background: "green"}}></button>
+                <button onClick={setCol} name="lime" 
+                style={{background: "lime"}}></button>
                 <button onClick={setCol} name="blue" 
                 style={{background: "blue"}}></button>
+                <button onClick={setCol} name="dodgerblue" 
+                style={{background: "dodgerblue"}}></button>
+                <button onClick={setCol} name="orange" 
+                style={{background: "orange"}}></button>
+                <button onClick={setCol} name="yellow" 
+                style={{background: "yellow"}}></button>
+                <button onClick={setCol} name="brown" 
+                style={{background: "brown"}}></button>
                 <button onClick={setCol} name="black" 
                 style={{background: "black"}}></button>
+                <button onClick={setCol} name="gray" 
+                style={{background: "gray"}}></button>
+                <button onClick={setCol} name="white" 
+                style={{background: "white"}}></button>
+                
             </div>
         </div>
     )

@@ -18,11 +18,10 @@ function Canvas() {
             const ctx = canvas.getContext("2d")
             ctx.strokeStyle = color
             ctx.lineWidth = width
-            //console.log(`painting x: ${x} + y: ${y}`)
             if(start) {
                 ctx.beginPath()
                 ctx.moveTo(x, y)
-                ctx.fillRect(x, y, 1, 1) //TODO change to variable
+                ctx.fillRect(x, y, 1, 1)
             } else {
                 ctx.lineTo(x, y)
                 ctx.stroke()
@@ -31,11 +30,13 @@ function Canvas() {
     }
 
     socket.on("startDraw", (data) => {
-        paint(data.x, data.y, true, data.color, data.width, data.id)
+        paint(data.x, data.y, true, 
+            data.color, data.width, data.id)
     })
 
     socket.on("draw", (data) => {
-        paint(data.x, data.y, false, data.color, data.width, data.id)
+        paint(data.x, data.y, false, 
+            data.color, data.width, data.id)
     })
 
     socket.on("clear", () => {
@@ -78,7 +79,7 @@ function Canvas() {
     }
 
     return(
-        <canvas ref={canvasRef} width={600} height={400} 
+        <canvas ref={canvasRef} width={1000} height={600} 
         onMouseDown={mouseDown} onMouseUp={mouseUp} 
         onMouseMove={mouseMove}></canvas>
     )

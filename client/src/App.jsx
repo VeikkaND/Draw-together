@@ -36,12 +36,17 @@ function App() {
   }
 
   return (
-    <div>
-      <input placeholder="nickname" onChange={handleName}></input> <br />
-      <button onClick={handleCreate}>create room</button>
+    <div className="home">
+      <h1>Draw-together</h1>
+      <input placeholder="nickname" onChange={handleName} 
+      id="name" autoComplete="off"></input> <br />
+      <button onClick={handleCreate} 
+      id="create">create room</button>
+      <p>or</p>
       <form onSubmit={handleSubmit}>
-        <input name="code" placeholder="room code"></input>
-        <button type="submit">submit</button>
+        <input name="code" placeholder="room code"
+        autoComplete="off"></input>
+        <button type="submit">join</button>
       </form>
     </div>
   )

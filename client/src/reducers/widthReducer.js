@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const widthSlice = createSlice({
     name: "width",
     initialState: {
-        value: 1
+        value: 2
     },
     reducers: {
         setWidth: (state, action) => {
