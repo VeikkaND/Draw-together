@@ -9,6 +9,15 @@ canvas {
     flex-direction: row;
 }
 
+.toolbar .colors {
+    display: flex;
+    flex-direction: row;
+}
+
+.toolbar .colors button {
+    margin-right: 5px;
+}
+
 .content {
     display: flex;
     flex-direction: row;
