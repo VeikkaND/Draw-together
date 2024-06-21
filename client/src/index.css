@@ -3,3 +3,8 @@
 canvas {
     border: solid 1px;
 }
+
+.toolbar {
+    display: flex;
+    flex-direction: row;
+}

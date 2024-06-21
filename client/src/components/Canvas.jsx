@@ -32,8 +32,14 @@ function Canvas() {
         paint(data.x, data.y, false, data.id)
     })
 
+    socket.on("clear", () => {
+        const canvas = canvasRef.current
+        const ctx = canvas.getContext("2d")
+        ctx.reset()
+    })
 
 
+    
     const mouseUp = () => {
         setMDown(false)
     }
@@ -51,8 +57,7 @@ function Canvas() {
         paint(x, y, true)
         setMDown(true)
         socket.emit("canvas:startdraw", 
-            ({room: room, id: socket.id, x: x, y: y}))
-            
+            ({room: room, id: socket.id, x: x, y: y}))   
     }
 
     const mouseMove = (event) => {
@@ -65,8 +70,9 @@ function Canvas() {
     }
 
     return(
-        <canvas ref={canvasRef} width={600} height={400} onMouseDown={mouseDown}
-        onMouseUp={mouseUp} onMouseMove={mouseMove}></canvas>
+        <canvas ref={canvasRef} width={600} height={400} 
+        onMouseDown={mouseDown} onMouseUp={mouseUp} 
+        onMouseMove={mouseMove}></canvas>
     )
 }
 
