@@ -20,11 +20,11 @@ function Room() {
             <button onClick={handleBack}>back</button>
             <h1>{room}</h1>
             <div className="content">
-                <div>
+                <div className="drawing">
                     <Canvas />
                     <Tools />
                 </div>
-                <div>
+                <div className="chatbox">
                     <Chat />
                 </div>
             </div>

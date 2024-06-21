@@ -2,9 +2,9 @@
 
 function Message({text, sender}) {
     return(
-        <div>
-            {sender}:
-            <p>{text}</p>
+        <div className="message">
+            <p id="sender">{sender}</p>
+            <p id="text">{text}</p>
         </div>
         
     )

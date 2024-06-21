@@ -1,7 +1,22 @@
+/*
+#1B262C
+#0F4C75
+#3282B8
+#BBE1FA
+*/
 
+body {
+    background-color: #BBE1FA;
+}
+
+p {
+    font-family: Barlow;
+}
 
 canvas {
-    border: solid 1px;
+    border: solid 1px #1B262C;
+    border-radius: 5px;
+    background-color: white;
 }
 
 .toolbar {
@@ -23,13 +38,23 @@ canvas {
     flex-direction: row;
 }
 
+.drawing {
+
+}
+
+.chatbox {
+    margin-left: 10px;
+}
+
 .chat {
     display: flex;
     flex-direction: column;
-    border: solid 1px;
+    border: solid 1px #1B262C;
+    border-radius: 5px;
     width: 30vw;
     height: 400px;
     text-align: center;
+    background-color: white;
 }
 
 .chat .messages {
@@ -39,6 +64,53 @@ canvas {
     overflow: auto;
 }
 
+.chat form {
+    padding-block: 5px;
+    border-top: solid 1px #1B262C;
+}
+
 .chat input {
-    
+    width: 80%;
+}
+
+.messages {
+    padding-left: 10px;
+}
+
+.messages::-webkit-scrollbar {
+    width: 10px;
+    background-color: white;
+}
+
+.messages::-webkit-scrollbar-thumb {
+    background-color: #0F4C75;
+    border-radius: 5px;
+}
+
+.message {
+    text-align: right;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    overflow-wrap: anywhere;
+}
+
+.message #sender {
+    margin: 0;
+    margin-right: 10px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.message #text {
+    margin-right: 5px;
+    margin-left: auto;
+    margin-block: 0;
+    padding-left: 30px;
+    padding-block: 5px;
+    padding-right: 10px;
+    border-radius: 5px;
+    font-size: 18px;
+    background-color: #3282B8;
+    color: white;
+    width: fit-content;
 }

@@ -1,6 +1,6 @@
 module.exports = (io, socket) => {
-    const message = ({room, id, text}) => {
-        io.to(room).emit("message", ({id: id, text: text}))
+    const message = ({room, name, text}) => {
+        io.to(room).emit("message", ({name: name, text: text}))
     }
 
     socket.on("chat:message", message)
